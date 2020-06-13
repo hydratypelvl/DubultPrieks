@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,5 +17,9 @@ Route::get('/', function () {
 Route::post('/anketa', 'AnketaController@store');
 Route::get('/anketa', 'AnketaController@create');
 
-Route::get('/pieteikumi', 'AnketaController@index');
+Route::get('/pieteikumi', 'AnketaController@index')->middleware('auth');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

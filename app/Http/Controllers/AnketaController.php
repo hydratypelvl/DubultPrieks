@@ -9,6 +9,11 @@ use Alert;
 
 class AnketaController extends Controller
 {
+    public function __construct()
+    {
+        // $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['anketa']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +33,6 @@ class AnketaController extends Controller
     public function create()
     {
         $dates = dates::all();
-        $anketas = Anketa::first()->get();
         return view('anketa', compact('anketas','dates'));
     }
 
@@ -58,8 +62,17 @@ class AnketaController extends Controller
         $pieteikums->number = request('number');
 
         $pieteikums->save();
-        Alert::success('Veiksmigi', 'Jūsu pieteikums ir veiksmīgi saņemts.');
-        return redirect('/');
+        $name =  $pieteikums->name;
+        
+        // dd(mb_substr($name, -1));
+        if(mb_substr($name, -1) == 's' || mb_substr($name, -1) == 'š'){
+            $name = mb_substr($name, 0, -1);
+            Alert::success('Paldies '.$name.'!', 'Ar jums drīzumā sazināsies dubultprieka komanda!');
+            return redirect('/');
+        }else {
+            Alert::success('Paldies '.$name, 'Ar jums drīzumā sazināsies dubultprieka komanda!');
+            return redirect('/');
+        }
     }
 
     /**

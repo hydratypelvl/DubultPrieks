@@ -8,7 +8,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
     @foreach($anketas->chunk(3) as $chunk)
         <div class="row">
             @foreach($chunk as $anketa)    
@@ -23,6 +23,33 @@
             @endforeach
         </div>
     @endforeach
+
+    <table class="table table-striped table-dark table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Vārds</th>
+                <th scope="col">Uzvārds</th>
+                <th scope="col">Tālrunis</th>
+                <th scope="col">Datums</th>
+                <th scope="col">NR</th>
+                <th scope="col">E-pasts</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($anketas as $anketa)
+            <tr>
+                <th scope="row">{{ $anketa->id }}</th>
+                <td>{{ $anketa->name }}</td>
+                <td>{{ $anketa->surname }}</td>
+                <td>{{ $anketa->number }}</td>
+                <td>{{ $anketa->date }}</td>
+                <td>{{ $anketa->carnumber }}</td>
+                <td>{{ $anketa->email }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

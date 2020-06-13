@@ -30,9 +30,10 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="label" for="name">Vārds</label>
-            <div>
+        <div class="form-row mb-3">
+            <div class="col">
+                <!-- First name -->
+                <label class="label" for="name">Vārds</label>
                 <input class="form-control @error('name') border-danger @enderror" 
                     type="text" 
                     name="name" 
@@ -43,11 +44,9 @@
                 <p class="text-danger">{{ $errors->first('name') }}</p>
                 @enderror
             </div>
-        </div>
-
-        <div class="form-group">
-            <label class="label" for="surname">Uzvārds</label>
-            <div>
+            <div class="col">
+                <!-- Last name -->
+                <label class="label" for="surname">Uzvārds</label>
                 <input class="form-control @error('surname') border-danger @enderror" 
                     type="text" 
                     name="surname" 
@@ -106,6 +105,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Nosūtīt</button>
+        <a href="/" type="submit" class="btn btn-warning">Atgriesties</a>
     </form>
 </div>
 </body>
