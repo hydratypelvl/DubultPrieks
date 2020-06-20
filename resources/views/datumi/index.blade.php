@@ -14,19 +14,28 @@
     <table class="table">
     <thead>
         <tr>
+        <th scope="col"><a href="/datumi/create" class="btn btn-success"><i class="fas fa-plus"></i></a></th>
         <th scope="col">#</th>
         <th scope="col">Datums</th>
-        <th scope="col" class="float-right">Edit</th>
-        <th scope="col" class="float-right">Delete</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+        
         </tr>
     </thead>
     <tbody>
     @foreach($dates as $date)
         <tr>
+        <th></th>
         <th scope="row">{{ $date->id }}</th>
         <td>{{ $date->date }}</td>
-        <td class="float-right"><button class="btn btn-warning"><i class="far fa-edit"></i></button></td>
-        <td class="float-right"><button class="btn btn-danger"><i class="far fa-trash-alt"></i></button></td>
+        <td><button class="btn btn-warning"><i class="far fa-edit"></i></button></td>
+        <td>
+            <form action="/datumi/{{ $date->id }}" method="POST">
+            @csrf
+            @method('DELETE')
+                <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+            </form>
+        </td>
         </tr>
         @endforeach
     </tbody>

@@ -23,6 +23,7 @@ Route::get('/pieteikumi', 'AnketaController@index')->middleware('auth');
 Route::get('/datumi', 'DateController@index');
 Route::get('/datumi/create', 'DateController@create');
 Route::post('/datumi', 'DateController@store');
+Route::delete('/datumi/{id}', 'DateController@destroy');
 
 Auth::routes();
 

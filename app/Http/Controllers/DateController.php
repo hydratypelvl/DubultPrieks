@@ -37,12 +37,6 @@ class DateController extends Controller
         Alert::success('Veiksmīgi', 'Datums pievienots veiksmīgi!');
         return redirect('/datumi');
     }
-
-    public function show($id)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -74,6 +68,9 @@ class DateController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $datums = Date::findOrFail($id);
+        $datums->delete();
+
+        return redirect('/datumi');
     }
 }
