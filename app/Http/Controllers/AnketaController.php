@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Anketa;
-use App\dates;
+use App\Date;
 use Alert;
 
 class AnketaController extends Controller
@@ -32,8 +32,8 @@ class AnketaController extends Controller
      */
     public function create()
     {
-        $dates = dates::all();
-        return view('anketa', compact('anketas','dates'));
+        $dates = Date::all();
+        return view('anketa', compact('dates'));
     }
 
     /**
@@ -44,6 +44,12 @@ class AnketaController extends Controller
      */
     public function store(Request $request)
     {
+        // $newDates = '';
+        // $dates = request('date');
+        // foreach($dates as $date){
+        //     $newDates = $newDates.$date. " ";
+        // }
+
         request()->validate([
             'date' => 'required',
             'name' => 'required',
@@ -51,6 +57,7 @@ class AnketaController extends Controller
             'carnumber' => 'required',
             'email' => 'required',
             'number' => 'required',
+            'comment' => 'max:250'
         ]);
         $pieteikums = new Anketa();
 
@@ -60,11 +67,11 @@ class AnketaController extends Controller
         $pieteikums->carnumber = request('carnumber');
         $pieteikums->email = request('email');
         $pieteikums->number = request('number');
+        $pieteikums->comment = request('comment');
 
         $pieteikums->save();
         $name =  $pieteikums->name;
         
-        // dd(mb_substr($name, -1));
         if(mb_substr($name, -1) == 's' || mb_substr($name, -1) == 'š'){
             $name = mb_substr($name, 0, -1);
             Alert::success('Paldies '.$name.'!', 'Ar jums drīzumā sazināsies dubultprieka komanda!');

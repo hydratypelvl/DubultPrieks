@@ -15,12 +15,13 @@ class CreateAnketasTable extends Migration
     {
         Schema::create('anketas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('date');
+            $table->json('date');
             $table->string('name');
             $table->string('surname');
             $table->string('carnumber');
             $table->string('email');
             $table->integer('number');
+            $table->text('comment');
             $table->timestamps();
         });
     }

@@ -13,12 +13,16 @@
 Route::get('/', function () {
     return view('index');
 });
-
+//ANKETU LAPAS
 Route::post('/anketa', 'AnketaController@store');
 Route::get('/anketa', 'AnketaController@create');
 
 Route::get('/pieteikumi', 'AnketaController@index')->middleware('auth');
 
+//DATUMU LAPAS
+Route::get('/datumi', 'DateController@index');
+Route::get('/datumi/create', 'DateController@create');
+Route::post('/datumi', 'DateController@store');
 
 Auth::routes();
 

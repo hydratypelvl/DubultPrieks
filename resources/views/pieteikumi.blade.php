@@ -8,22 +8,6 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 <body>
-<div class="container-fluid">
-    @foreach($anketas->chunk(3) as $chunk)
-        <div class="row">
-            @foreach($chunk as $anketa)    
-                <div class="col-sm" style="border: 1px solid black;padding: 5px;margin: 5px;width:300px;">
-                    <h1>{{ $anketa->name }} {{ $anketa->surname }}</h1>
-                    <p><strong>Datums: </strong>{{ $anketa->date }}</p>
-                    <p><strong>E-pasts: </strong>{{ $anketa->email }}</p>
-                    <p><strong>Talruna Nr: </strong>{{ $anketa->number }}</p>
-                    <p><strong>Automasinas Nr: </strong>{{ $anketa->carnumber }}</p>
-                    <!-- <p><strong>Pievienosanas Datums: </strong>{{ $anketa->created_at }}</p> -->
-                </div>
-            @endforeach
-        </div>
-    @endforeach
-
     <table class="table table-striped table-dark table-hover">
         <thead>
             <tr>
@@ -34,6 +18,7 @@
                 <th scope="col">Datums</th>
                 <th scope="col">NR</th>
                 <th scope="col">E-pasts</th>
+                <th scope="col">Komentārs</th>
             </tr>
         </thead>
         <tbody>
@@ -43,13 +28,16 @@
                 <td>{{ $anketa->name }}</td>
                 <td>{{ $anketa->surname }}</td>
                 <td>{{ $anketa->number }}</td>
-                <td>{{ $anketa->date }}</td>
+                <td>
+                @foreach($anketa->date as $datums)
+                    <li>{{ $datums }}</li>
+                @endforeach</td>
                 <td>{{ $anketa->carnumber }}</td>
                 <td>{{ $anketa->email }}</td>
+                <td>{{ $anketa->comment }}</td>
             </tr>
             @endforeach
         </tbody>
     </table>
-</div>
 </body>
 </html>
