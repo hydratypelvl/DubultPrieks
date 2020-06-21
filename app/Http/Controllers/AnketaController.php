@@ -22,7 +22,7 @@ class AnketaController extends Controller
     public function index()
     {   
         $anketas = Anketa::all();
-        return view('pieteikumi', compact('anketas'));
+        return view('anketa/index', compact('anketas'));
     }
 
     /**
@@ -33,7 +33,7 @@ class AnketaController extends Controller
     public function create()
     {
         $dates = Date::all();
-        return view('anketa', compact('dates'));
+        return view('anketa/create', compact('dates'));
     }
 
     /**
@@ -44,12 +44,6 @@ class AnketaController extends Controller
      */
     public function store(Request $request)
     {
-        // $newDates = '';
-        // $dates = request('date');
-        // foreach($dates as $date){
-        //     $newDates = $newDates.$date. " ";
-        // }
-
         request()->validate([
             'date' => 'required',
             'name' => 'required',
@@ -90,7 +84,8 @@ class AnketaController extends Controller
      */
     public function show($id)
     {
-        //
+        $anketa = Anketa::findOrFail($id);
+        return view('anketa/show', compact('anketa'));
     }
 
     /**
@@ -101,7 +96,10 @@ class AnketaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $anketa = Anketa::findOrFail($id);
+        $datums = Date::findOrFail($id);
+        
+        return view('anketa.edit', compact('anketa', 'datums'));
     }
 
     /**
@@ -124,6 +122,10 @@ class AnketaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $anketa = Anketa::findOrFail($id);
+        $anketa->delete();
+        Alert::info('Veiksmīgi!', 'Pieteikums Dzēsts no datubāzes!');
+
+        return redirect('/pieteikumi');
     }
 }

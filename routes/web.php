@@ -16,6 +16,9 @@ Route::get('/', function () {
 //ANKETU LAPAS
 Route::post('/anketa', 'AnketaController@store');
 Route::get('/anketa', 'AnketaController@create');
+Route::get('/pieteikumi/{id}', 'AnketaController@show');
+Route::get('/anketa/edit/{id}', 'AnketaController@edit');
+Route::delete('/pieteikumi/{id}', 'AnketaController@destroy');
 
 Route::get('/pieteikumi', 'AnketaController@index')->middleware('auth');
 
