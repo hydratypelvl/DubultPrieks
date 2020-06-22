@@ -17,9 +17,12 @@ Route::get('/', function () {
 Route::post('/anketa', 'AnketaController@store');
 Route::get('/anketa', 'AnketaController@create');
 
+// Route::get('/date', 'DateController@create');
+// Route::post('/date', 'DateController@store');
+
+
 Route::get('/pieteikumi', 'AnketaController@index')->middleware('auth');
 
-
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');

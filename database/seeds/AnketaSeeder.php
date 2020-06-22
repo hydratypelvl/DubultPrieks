@@ -12,8 +12,8 @@ class AnketaSeeder extends Seeder
     public function run()
     {
         $faker = \Faker\Factory::create();
-
-        for($i=0; $i<=100; $i++):
+        $amount = 100;
+        for($i=0; $i<=$amount; $i++):
             DB::table('anketas')
                 ->insert([
                     'date' => $faker->date,
@@ -21,7 +21,8 @@ class AnketaSeeder extends Seeder
                     'surname' => $faker->lastname,
                     'number' => $faker->numberBetween($min = 25000000, $max = 29000000),
                     'email' => $faker->unique()->safeEmail,
-                    'carnumber' => $faker->emoji
+                    'carnumber' => $faker->emoji,
+                    'ip' => $faker->numberBetween($min = 1111111111, $max = 999999999)
                 ]);
         endfor;
     }

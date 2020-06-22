@@ -6,13 +6,13 @@ use Illuminate\Http\Request;
 use App\Anketa;
 use App\dates;
 use Alert;
+use auth;
 
 class AnketaController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('auth');
-        $this->middleware('auth', ['except' => ['anketa']]);
+        // $this->middleware('auth')->except('anketa');
     }
     /**
      * Display a listing of the resource.
@@ -21,8 +21,10 @@ class AnketaController extends Controller
      */
     public function index()
     {   
-        $anketas = Anketa::all();
-        return view('pieteikumi', compact('anketas'));
+        if (auth::check()){
+            $anketas = Anketa::all();
+            return view('pieteikumi', compact('anketas'));
+        } return view('auth.login');
     }
 
     /**
@@ -50,16 +52,18 @@ class AnketaController extends Controller
             'surname' => 'required',
             'carnumber' => 'required',
             'email' => 'required',
-            'number' => 'required',
+            'number' => 'required|max:11',
         ]);
+        
         $pieteikums = new Anketa();
-
         $pieteikums->date = request('date');
         $pieteikums->name = request('name');
         $pieteikums->surname = request('surname');
         $pieteikums->carnumber = request('carnumber');
         $pieteikums->email = request('email');
         $pieteikums->number = request('number');
+        $pieteikums->ip = Request()->ip();
+
 
         $pieteikums->save();
         $name =  $pieteikums->name;

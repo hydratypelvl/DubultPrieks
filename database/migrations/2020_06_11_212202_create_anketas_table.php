@@ -21,6 +21,7 @@ class CreateAnketasTable extends Migration
             $table->string('carnumber');
             $table->string('email');
             $table->integer('number');
+            $table->string('ip');
             $table->timestamps();
         });
     }
