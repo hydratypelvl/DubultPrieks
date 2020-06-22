@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Anketa;
-use App\dates;
+use App\Date;
 use Alert;
 use auth;
 
@@ -23,7 +23,7 @@ class AnketaController extends Controller
     {   
         if (auth::check()){
             $anketas = Anketa::all();
-            return view('pieteikumi', compact('anketas'));
+            return view('anketa/index', compact('anketas'));
         } return view('auth.login');
     }
 
@@ -34,8 +34,8 @@ class AnketaController extends Controller
      */
     public function create()
     {
-        $dates = dates::all();
-        return view('anketa', compact('anketas','dates'));
+        $dates = Date::all();
+        return view('anketa/create', compact('dates'));
     }
 
     /**
@@ -53,6 +53,7 @@ class AnketaController extends Controller
             'carnumber' => 'required',
             'email' => 'required',
             'number' => 'required|max:11',
+            'comment' => 'max:255'
         ]);
         
         $pieteikums = new Anketa();
@@ -63,12 +64,11 @@ class AnketaController extends Controller
         $pieteikums->email = request('email');
         $pieteikums->number = request('number');
         $pieteikums->ip = Request()->ip();
-
+        $pieteikums->comment = request('comment');
 
         $pieteikums->save();
         $name =  $pieteikums->name;
         
-        // dd(mb_substr($name, -1));
         if(mb_substr($name, -1) == 's' || mb_substr($name, -1) == 'š'){
             $name = mb_substr($name, 0, -1);
             Alert::success('Paldies '.$name.'!', 'Ar jums drīzumā sazināsies dubultprieka komanda!');
@@ -87,7 +87,8 @@ class AnketaController extends Controller
      */
     public function show($id)
     {
-        //
+        $anketa = Anketa::findOrFail($id);
+        return view('anketa/show', compact('anketa'));
     }
 
     /**
@@ -98,7 +99,10 @@ class AnketaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $anketa = Anketa::findOrFail($id);
+        $datums = Date::findOrFail($id);
+        
+        return view('anketa.edit', compact('anketa', 'datums'));
     }
 
     /**
@@ -121,6 +125,10 @@ class AnketaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $anketa = Anketa::findOrFail($id);
+        $anketa->delete();
+        Alert::info('Veiksmīgi!', 'Pieteikums Dzēsts no datubāzes!');
+
+        return redirect('/pieteikumi');
     }
 }

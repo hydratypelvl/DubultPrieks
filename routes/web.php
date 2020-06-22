@@ -13,15 +13,20 @@
 Route::get('/', function () {
     return view('index');
 });
-
+//ANKETU LAPAS
 Route::post('/anketa', 'AnketaController@store');
 Route::get('/anketa', 'AnketaController@create');
-
-// Route::get('/date', 'DateController@create');
-// Route::post('/date', 'DateController@store');
-
-
+//Pieteikumu Lapas
 Route::get('/pieteikumi', 'AnketaController@index')->middleware('auth');
+Route::get('/pieteikumi/{id}', 'AnketaController@show')->middleware('auth');
+Route::get('/anketa/edit/{id}', 'AnketaController@edit')->middleware('auth');
+Route::delete('/pieteikumi/{id}', 'AnketaController@destroy')->middleware('auth');
+
+//DATUMU LAPAS
+Route::get('/datumi', 'DateController@index');
+Route::get('/datumi/create', 'DateController@create');
+Route::post('/datumi', 'DateController@store');
+Route::delete('/datumi/{id}', 'DateController@destroy');
 
 Auth::routes(['register' => false]);
 
