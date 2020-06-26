@@ -22,8 +22,9 @@ class AnketaController extends Controller
     public function index()
     {   
         if (auth::check()){
-            $anketas = Anketa::all();
-            return view('anketa/index', compact('anketas'));
+            $anketas = Anketa::paginate(20);
+            $pieteikumi = Anketa::count();
+            return view('anketa/index', compact('anketas', 'pieteikumi'));
         } return view('auth.login');
     }
 
@@ -100,9 +101,20 @@ class AnketaController extends Controller
     public function edit($id)
     {
         $anketa = Anketa::findOrFail($id);
-        $datums = Date::findOrFail($id);
+        $allDates = Date::all()->pluck('date')->toArray();
+        $datums = json_decode(Anketa::all()->pluck('date'));
+        $datumi = Anketa::all();
+
+        $array = ['Valmiera', 'Cēsis', 'Rīga'];
+        $arrayT = ['Valmiera', 'Rēzekne', 'Rīga', 'Cēsis'];
+        // foreach($datums[0] as $arr){
+        //     echo $arr;
+        // }
+        // dd($allDates);
+
+        // dd($datumi[0]->date);
         
-        return view('anketa.edit', compact('anketa', 'datums'));
+        return view('anketa.edit', compact('anketa', 'datumi', 'allDates','datums'));
     }
 
     /**
@@ -114,7 +126,29 @@ class AnketaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        request()->validate([
+            'date' => 'required',
+            'name' => 'required',
+            'surname' => 'required',
+            'carnumber' => 'required',
+            'email' => 'required',
+            'number' => 'required|max:11',
+            'comment' => 'max:255'
+        ]);
+
+        $pieteikums = Anketa::findOrFail($id);
+        $pieteikums->date = request('date');
+        $pieteikums->name = request('name');
+        $pieteikums->surname = request('surname');
+        $pieteikums->carnumber = request('carnumber');
+        $pieteikums->email = request('email');
+        $pieteikums->number = request('number');
+        $pieteikums->ip = Request()->ip();
+        $pieteikums->comment = request('comment');
+
+        $pieteikums->update();
+
+        return redirect('/pieteikumi');
     }
 
     /**

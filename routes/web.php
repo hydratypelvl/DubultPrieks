@@ -19,7 +19,8 @@ Route::get('/anketa', 'AnketaController@create');
 //Pieteikumu Lapas
 Route::get('/pieteikumi', 'AnketaController@index')->middleware('auth');
 Route::get('/pieteikumi/{id}', 'AnketaController@show')->middleware('auth');
-Route::get('/anketa/edit/{id}', 'AnketaController@edit')->middleware('auth');
+Route::get('/pieteikumi/edit/{id}', 'AnketaController@edit')->middleware('auth');
+Route::put('/pieteikumi/{id}', 'AnketaController@update')->middleware('auth');
 Route::delete('/pieteikumi/{id}', 'AnketaController@destroy')->middleware('auth');
 
 //DATUMU LAPAS
@@ -29,5 +30,6 @@ Route::post('/datumi', 'DateController@store');
 Route::delete('/datumi/{id}', 'DateController@destroy');
 
 Auth::routes(['register' => false]);
+// Auth::routes();  
 
 Route::get('/home', 'HomeController@index')->name('home');

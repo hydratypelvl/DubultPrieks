@@ -7,7 +7,7 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
-<body>
+<body style="background-color: #ffd600;">
 <div class="container">
 <h1>Pieteikums</h1>
     <table class="table table-striped table-dark table-bordered table-hover">
@@ -42,9 +42,20 @@
                 <td><strong>Komentāri:</strong></th>
                 <td>{{ $anketa->comment}}</th>
             </tr>
+            <tr>
+                <td><strong>IP:</strong></th>
+                <td>{{ $anketa->ip}}</th>
+            </tr>
         </tbody>
     </table>
-    <a href="/pieteikumi" class="btn btn-primary">Atgriezties</a>
+    <div class="btn-group" role="group">
+        <a class="btn btn-primary" href="/pieteikumi">Atgriezties</a>
+        <form class="btn-danger" action="/pieteikumi/{{ $anketa->id }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-danger" onclick="return confirm('Vai tiešām vēlaties dzēst šo pieteikumu?')">Dzēst</button>
+        </form>
+    </div>
 </div>
 </body>
 </html>

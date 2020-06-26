@@ -13,19 +13,29 @@
 </head>
 <body style="background-color: #ffd600;">
 <div class="container mt-5">
-    <form action="/anketa/edit/{{ $anketa->id }}" method="post">
+    <form action="/pieteikumi/{{ $anketa->id }}" method="post">
     @csrf
+    @method('PUT')
         <div class="form-group">
         <label>Vieta un Datums *</label>
-        @foreach($datums as $date)
+        @foreach($allDates as $oneDate)
             <div class="form-check form-check">
-                <input class="form-check-input" type="checkbox" value="{{ $date->date }}" name="date[]">
-                <label class="form-check-label">{{ $date->date }}</label>
-            </div>
-        @endforeach
-        
-        </div>
+            
+                
+                
 
+                    <input class="form-check-input" type="checkbox" value="{{ $oneDate }}" name="date[]">
+                    <label class="form-check-label">{{ $oneDate }}</label>
+                    
+                
+                
+
+            </div>
+            @endforeach
+            @foreach($datumi[0]->date as $date)
+                <li>{{ $date }}</li>
+            @endforeach
+        </div>
         <div class="form-row mb-3">
             <div class="col">
                 <!-- First name -->

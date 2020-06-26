@@ -8,9 +8,21 @@
     <script src="https://use.fontawesome.com/releases/v5.12.1/js/all.js" crossorigin="anonymous"></script>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="{{ asset ('css/styles.css') }}" /> -->
 </head>
 <body>
 @include('sweetalert::alert')
+    <div class="row">
+        <div class="col">
+            Kopā aizpildītās anketas: {{ $pieteikumi }}
+        </div>
+        <div class="col">
+            Kopā aizpildītās anketas: {{ $pieteikumi }}
+        </div>
+        <div class="col">
+            Kopā aizpildītās anketas: {{ $pieteikumi }}
+        </div>
+    </div>
     <table class="table table-striped table-dark table-hover">
         <thead>
             <tr>
@@ -40,7 +52,7 @@
                 <td>{{ $anketa->carnumber }}</td>
                 <td>{{ $anketa->email }}</td>
                 <td><a href="/pieteikumi/{{ $anketa->id }}" class="btn btn-primary"><i class="fas fa-info"></i></a></td>
-                <td><a href="/pieteikumi/edit/{{ $anketa->id }}" class="btn btn-warning disabled"><i class="far fa-edit"></i></a></td>
+                <td><a href="/pieteikumi/edit/{{ $anketa->id }}" class="btn btn-warning"><i class="far fa-edit"></i></a></td>
                 <td>
                     <form action="/pieteikumi/{{ $anketa->id }}" method="POST">
                         @csrf
@@ -52,5 +64,6 @@
             @endforeach
         </tbody>
     </table>
+    {{ $anketas->links() }}
 </body>
 </html>
