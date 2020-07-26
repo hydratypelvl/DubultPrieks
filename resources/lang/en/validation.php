@@ -129,8 +129,26 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'name' => [
+            'required' => 'vārda lauks ir obligāti aizpildāmais lauks',
+            'min' => 'vārdam jābūt vismaz 2 rakstzīmes garam'
+        ],
+        'surname' => [
+            'required' => 'uzvārda lauks ir obligāti aizpildāmais lauks',
+        ],
+        'carnumber' => [
+            'required' => 'numurzīmes lauks ir obligāti aizpildāmais lauks',
+        ],
+        'email' => [
+            'required' => 'e-pasta lauks ir obligāti aizpildāmais lauks',
+        ],
+        'number' => [
+            'required' => 'tālruņa lauks ir obligāti aizpildāmais lauks',
+            'min' => 'tālrunim jābūt vismaz 7 rakstzīmes garam',
+            'max' => 'tālrunis nevar pārsniegt 11 rakstzīmes',
+        ],
+        'comment' => [
+            'max' => 'maximālais rakstzīmju skaits nedrīkst pārsniegt 255',
         ],
     ],
 

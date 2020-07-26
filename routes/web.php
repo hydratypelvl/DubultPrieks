@@ -29,7 +29,7 @@ Route::get('/datumi/create', 'DateController@create');
 Route::post('/datumi', 'DateController@store');
 Route::delete('/datumi/{id}', 'DateController@destroy');
 
-Auth::routes(['register' => false]);
+Auth::routes(['register' => false]); //REGISTRESANAS NONEMSANA
 // Auth::routes();  
 
 Route::get('/home', 'HomeController@index')->name('home');

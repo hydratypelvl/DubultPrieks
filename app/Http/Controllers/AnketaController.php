@@ -49,11 +49,11 @@ class AnketaController extends Controller
     {
         request()->validate([
             'date' => 'required',
-            'name' => 'required',
+            'name' => 'required|min:2',
             'surname' => 'required',
             'carnumber' => 'required',
             'email' => 'required',
-            'number' => 'required|max:11',
+            'number' => 'required|max:11|min:7',
             'comment' => 'max:255'
         ]);
         
