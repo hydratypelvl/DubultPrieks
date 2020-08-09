@@ -23,6 +23,9 @@
                 <label class="form-check-label">{{ $date->date }}</label>
             </div>
         @endforeach
+        @error('date')
+            <p class="text-danger">{{ $errors->first('date') }}</p>
+        @enderror
         </div>
 
         <div class="form-row mb-3">
@@ -101,7 +104,7 @@
 
         <div class="form-group">
             <label class="label" for="comment">Komentāri</label>
-                    <textarea class="form-control @error('error') border-danger @enderror" name="comment" id="comment" rows="3">{{ old('coment') }}</textarea>
+                    <textarea class="form-control @error('error') border-danger @enderror" name="comment" id="comment" rows="3">{{ old('comment') }}</textarea>
                 @error('comment')
                 <p class="text-danger">{{ $errors->first('comment') }}</p>
                 @enderror

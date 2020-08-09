@@ -150,6 +150,9 @@ return [
         'comment' => [
             'max' => 'maximālais rakstzīmju skaits nedrīkst pārsniegt 255',
         ],
+        'date' => [
+            'required' => 'ir jāizvēlas vismaz 1 datums',
+        ],
     ],
 
     /*
