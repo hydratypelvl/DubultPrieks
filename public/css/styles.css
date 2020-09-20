@@ -10217,7 +10217,21 @@ form .row:first-child .floating-label-form-group {
   background-color: #424242;
   color: #fff;
 }
-
 .copyright {
   background-color: #2b2b2b;
+}
+.maintenance-bg{
+  background-image: url('../images/maintenance.jpg');
+  /* Full height */
+  height: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.repair-icon {
+  width: calc(10em + 1vw);
+}
+.maintenance-letters{
+  font-size: calc(2.5em + 1vw);
 }

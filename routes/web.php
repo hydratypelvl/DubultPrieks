@@ -11,11 +11,21 @@
 */
 
 Route::get('/', function () {
+    return view('maintenance');
+});
+
+Route::get('/index', function () {
     return view('index');
 });
+// Route::get('/index', function () {
+//     return view('index');
+// })->middleware('auth');
+
+
+
 //ANKETU LAPAS
-Route::post('/anketa', 'AnketaController@store');
-Route::get('/anketa', 'AnketaController@create');
+Route::post('/anketa', 'AnketaController@store')->middleware('auth');;
+Route::get('/anketa', 'AnketaController@create')->middleware('auth');;
 //Pieteikumu Lapas
 Route::get('/pieteikumi', 'AnketaController@index')->middleware('auth');
 Route::get('/pieteikumi/{id}', 'AnketaController@show')->middleware('auth');
