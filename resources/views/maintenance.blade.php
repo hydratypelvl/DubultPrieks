@@ -11,20 +11,17 @@
     <p class="text-center"><mark>Pašlaik notiek lapas uzlabojumi, atvainojamies par sagādātajām neērtībām.</mark></p>
     <img src="../images/bg-small.jpg" style="width: calc(15em + 1vw);">
 </div>
-
-
-    <div class="container d-flex align-items-center flex-column pt-5">
-        <div class="row">
-            
-            <!-- Footer Social Icons-->
-            <div class="col-lg-4 mb-5 mb-lg-0">
-
-                <a class="btn btn-outline-light btn-social mx-1" href="https://www.facebook.com/dubultpriekatirdzins/" target="_blank"><i class="fab fa-fw fa-facebook-f"></i></a>
-                <a class="btn btn-outline-light btn-social mx-1" href="https://www.instagram.com/dubultpriekatirdzins/" target="_blank"><i class="fab fa-fw fa-instagram"></i></a>
-
-            </div>
-            
+    <div class="container-soc">
+        <a href="https://www.facebook.com/dubultpriekatirdzins/" target="_blank">
+        <div class="nav-itemm fb-color">
+            <i class="fab fa-facebook-f"></i>
         </div>
+        </a>
+        <a href="https://www.instagram.com/dubultpriekatirdzins/" target="_blank">
+        <div class="nav-itemm ig-color">
+            <i class="fab fa-instagram"></i>
+        </div>
+        </a>
     </div>
 
 </body>

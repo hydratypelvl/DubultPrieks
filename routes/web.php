@@ -13,6 +13,9 @@
 Route::get('/', function () {
     return view('maintenance');
 });
+Route::get('/portfolio', function () {
+    return view('portfolio');
+});
 
 Route::get('/index', function () {
     return view('index');
@@ -39,7 +42,7 @@ Route::get('/datumi/create', 'DateController@create');
 Route::post('/datumi', 'DateController@store');
 Route::delete('/datumi/{id}', 'DateController@destroy');
 
-Auth::routes(['register' => false]); //REGISTRESANAS NONEMSANA
-// Auth::routes();  
+// Auth::routes(['register' => false]); //REGISTRESANAS NONEMSANA
+Auth::routes();  
 
 Route::get('/home', 'HomeController@index')->name('home');
